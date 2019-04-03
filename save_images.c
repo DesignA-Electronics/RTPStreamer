@@ -314,14 +314,14 @@ static int decode_rtp_packet(uint8_t *packet, int len, SDL_Renderer *renderer,
     if (dump_stats) {
         printf("marker: %d (0x%x) sequence: %d offset: %d\n", marker,
                packet[0], sequence, offset);
+        printf("offset: %d len: %d, total: %d vs %ld\n", offset, payload_len,
+               offset + payload_len, sizeof(buffer));
         if (marker) {
             printf("timestamp: %d diff: %d\n", timestamp,
                    timestamp - last_timestamp);
             last_timestamp = timestamp;
         }
     }
-    // printf("offset: %d len: %d, total: %d vs %d\n", offset, payload_len,
-    // offset + payload_len, sizeof(buffer));
     memcpy(&buffer[offset], payload, payload_len);
     pos = offset + payload_len;
 
